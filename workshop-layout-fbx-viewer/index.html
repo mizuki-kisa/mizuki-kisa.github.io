@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Online FBX viewer for the workshop layout draft." />
+    <title>Workshop Layout FBX Viewer</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.165.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.165.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <div>
+            <h1>Workshop Layout</h1>
+            <p>FBX Viewer</p>
+          </div>
+        </div>
+
+        <nav class="toolbar" aria-label="Viewer controls">
+          <button id="resetView" class="icon-button" type="button" aria-label="Reset view" title="Reset view">
+            <i data-lucide="rotate-ccw" aria-hidden="true"></i>
+          </button>
+          <button id="toggleGrid" class="icon-button is-active" type="button" aria-label="Toggle grid" title="Toggle grid">
+            <i data-lucide="grid-3x3" aria-hidden="true"></i>
+          </button>
+          <button id="toggleWireframe" class="icon-button" type="button" aria-label="Toggle wireframe" title="Toggle wireframe">
+            <i data-lucide="box" aria-hidden="true"></i>
+          </button>
+          <button id="toggleRotate" class="icon-button" type="button" aria-label="Toggle rotation" title="Toggle rotation">
+            <i data-lucide="refresh-cw" aria-hidden="true"></i>
+          </button>
+          <button id="saveImage" class="icon-button" type="button" aria-label="Save image" title="Save image">
+            <i data-lucide="camera" aria-hidden="true"></i>
+          </button>
+          <button id="fullscreen" class="icon-button" type="button" aria-label="Fullscreen" title="Fullscreen">
+            <i data-lucide="maximize-2" aria-hidden="true"></i>
+          </button>
+          <label class="upload-button" aria-label="Open FBX file" title="Open FBX file">
+            <i data-lucide="upload" aria-hidden="true"></i>
+            <span>FBX</span>
+            <input id="fileInput" type="file" accept=".fbx,application/octet-stream" />
+          </label>
+        </nav>
+      </header>
+
+      <main class="workspace">
+        <section class="viewer-panel" aria-label="3D model viewer">
+          <canvas id="viewer"></canvas>
+          <div id="loadingOverlay" class="loading-overlay">
+            <div class="loading-card">
+              <span class="loading-ring" aria-hidden="true"></span>
+              <strong id="loadingTitle">Loading model</strong>
+              <span id="loadingProgress">0%</span>
+            </div>
+          </div>
+          <div id="dropOverlay" class="drop-overlay" hidden>
+            <div>
+              <i data-lucide="box" aria-hidden="true"></i>
+              <span>Drop FBX</span>
+            </div>
+          </div>
+        </section>
+
+        <aside class="inspector" aria-label="Model information">
+          <div class="inspector-header">
+            <span class="eyebrow">Model</span>
+            <strong id="modelName">WorkshopLayout_Draft_Ver1.fbx</strong>
+          </div>
+
+          <dl class="metrics">
+            <div>
+              <dt>Meshes</dt>
+              <dd id="meshCount">-</dd>
+            </div>
+            <div>
+              <dt>Triangles</dt>
+              <dd id="triangleCount">-</dd>
+            </div>
+            <div>
+              <dt>Bounds</dt>
+              <dd id="dimensions">-</dd>
+            </div>
+            <div>
+              <dt>File</dt>
+              <dd id="fileSize">-</dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd id="modelStatus">Loading</dd>
+            </div>
+          </dl>
+        </aside>
+      </main>
+    </div>
+
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
